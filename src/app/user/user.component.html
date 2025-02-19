@@ -1,0 +1,116 @@
+<div class="table-container">
+  <div class="filters">
+    <div class="input-col">
+      <input
+        type="text"
+        id="searchInput"
+        class="input-field"
+        placeholder="Search..."
+        [(ngModel)]="searchKeyword"
+        (input)="handleSearch()"
+      />
+    </div>
+
+    <div class="select-col">
+      <select
+        id="selectColumn"
+        class="select-field"
+        (change)="handleSortSelection($event)"
+      >
+        <option value="">Select Column for sorting</option>
+        <option value="id">ID</option>
+        <option value="firstName">First Name</option>
+        <option value="lastName">Last Name</option>
+        <option value="age">Age</option>
+        <option value="phone">Phone No.</option>
+        <option value="email">Email</option>
+      </select>
+    </div>
+  </div>
+
+  <table class="data-table">
+    <thead class="table-head">
+      <tr>
+        <th class="table-header" (click)="handleSort('id')">
+          ID
+          <span *ngIf="sortColumn === 'id'">{{
+            sortDirection === "asc" ? "▲" : "▼"
+          }}</span>
+        </th>
+        <th class="table-header" (click)="handleSort('firstName')">
+          First Name
+          <span *ngIf="sortColumn === 'firstName'">{{
+            sortDirection === "asc" ? "▲" : "▼"
+          }}</span>
+        </th>
+        <th class="table-header" (click)="handleSort('lastName')">
+          Last Name
+          <span *ngIf="sortColumn === 'lastName'">{{
+            sortDirection === "asc" ? "▲" : "▼"
+          }}</span>
+        </th>
+        <th class="table-header" (click)="handleSort('age')">
+          Age
+          <span *ngIf="sortColumn === 'age'">{{
+            sortDirection === "asc" ? "▲" : "▼"
+          }}</span>
+        </th>
+        <th class="table-header" (click)="handleSort('phone')">
+          Phone No.
+          <span *ngIf="sortColumn === 'phone'">{{
+            sortDirection === "asc" ? "▲" : "▼"
+          }}</span>
+        </th>
+        <th class="table-header" (click)="handleSort('email')">
+          Email
+          <span *ngIf="sortColumn === 'email'">{{
+            sortDirection === "asc" ? "▲" : "▼"
+          }}</span>
+        </th>
+      </tr>
+    </thead>
+    <tbody class="table-body">
+      <tr
+        class="table-row"
+        *ngFor="let user of paginatedUsers; let i = index"
+        [ngStyle]="{ backgroundColor: i % 2 === 0 ? '#f9f9f9' : '#ffffff' }"
+      >
+        <td class="table-cell">{{ user.id }}</td>
+        <td class="table-cell">{{ user.firstName }}</td>
+        <td class="table-cell">{{ user.lastName }}</td>
+        <td class="table-cell">{{ user.age }}</td>
+        <td class="table-cell">{{ user.phone }}</td>
+        <td class="table-cell">{{ user.email }}</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <nav aria-label="Page navigation" class="pagination-container">
+    <ul class="pagination">
+      <li
+        class="pagination-item"
+        [class.disabled]="currentPage === 1"
+        (click)="updatePage(currentPage - 1)"
+      >
+        <a class="pagination-link">Previous</a>
+      </li>
+
+      <li
+        class="pagination-item"
+        *ngFor="let page of [].constructor(totalPages); let i = index"
+        [class.active]="currentPage === i + 1"
+        (click)="updatePage(i + 1)"
+      >
+        <a class="pagination-link">{{ i + 1 }}</a>
+      </li>
+
+      <li
+        class="pagination-item"
+        [class.disabled]="currentPage === totalPages"
+        (click)="updatePage(currentPage + 1)"
+      >
+        <a class="pagination-link">Next</a>
+      </li>
+    </ul>
+  </nav>
+</div>

@@ -1,0 +1,142 @@
+.table-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+
+  .filters {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    gap: 16px;
+
+    .input-col,
+    .select-col {
+      display: flex;
+      flex-direction: column;
+    }
+  }
+}
+
+.input-field,
+.select-field {
+  padding: 0.5rem 1rem;
+  border: 1px solid #ced4da;
+  border-radius: 8px;
+  outline: none;
+
+  &:focus {
+    border-color: #4a90e2;
+    box-shadow: 0 0 5px rgba(74, 144, 226, 0.5);
+  }
+}
+
+.data-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 1.5rem;
+
+  .table-head {
+    background-color: #4a90e2;
+    color: white;
+
+    .table-header {
+      padding: 1rem;
+      cursor: pointer;
+      text-align: left;
+
+      &:hover {
+        background-color: #357abd;
+      }
+    }
+  }
+
+  .table-body {
+    .table-row {
+      &:nth-child(even) {
+        background-color: #f9f9f9;
+      }
+
+      &:nth-child(odd) {
+        background-color: #ffffff;
+      }
+
+      .table-cell {
+        padding: 0.75rem;
+        overflow-wrap: anywhere;
+      }
+    }
+  }
+}
+
+.pagination-container {
+  margin-top: 1rem;
+  .pagination {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    list-style: none;
+    gap: 18px;
+    padding: 0;
+
+    .pagination-item {
+      margin: 0 0.25rem;
+
+      &.disabled {
+        pointer-events: none;
+        opacity: 0.5;
+      }
+
+      &.active .pagination-link {
+        background-color: #4a90e2;
+        border-color: #4a90e2;
+        color: white;
+      }
+
+      .pagination-link {
+        padding: 0.5rem 0.75rem;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        color: #4a90e2;
+        text-decoration: none;
+        cursor: pointer;
+
+        &:hover {
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .table-container {
+    .filters {
+      flex-wrap: wrap;
+
+      .input-col,
+      .select-col {
+        width: 100%;
+      }
+    }
+  }
+
+  .data-table {
+    .table-head {
+      .table-header {
+        font-size: 0.9rem;
+      }
+    }
+
+    .table-body {
+      .table-cell {
+        font-size: 0.85rem;
+      }
+    }
+  }
+
+  .pagination-container {
+    .pagination-item .pagination-link {
+      padding: 0.5rem;
+    }
+  }
+}
